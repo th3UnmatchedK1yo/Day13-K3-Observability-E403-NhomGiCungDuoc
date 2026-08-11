@@ -3,8 +3,8 @@
 ## 1. Thông tin nhóm
 
 - Tên nhóm: NhomGiCungDuoc
-- Repository URL: [Sinh viên chèn link repo]
-- Commit SHA cuối: [Sinh viên chèn mã SHA]
+- Repository URL: https://github.com/th3UnmatchedK1yo/Day13-K3-Observability-E403-NhomGiCungDuoc
+- Commit SHA cuối: 09135074c7610912b9e4fe3dc125cd8a3f836cec
 - Thành viên và vai trò:
   - Võ Hà Minh Huy (2A202601373) - Dashboard, SLO & Alert
   - Đỗ Duy Đông (2a202601657) - Logging & PII
@@ -56,8 +56,8 @@
 
 Với mỗi thành viên, ghi rõ nhiệm vụ và link commit/PR tương ứng.
 
-| Thành viên | Phần việc | Commit/PR | Điều đã học |
+| Thành viên | Phần việc (Nhiệm vụ & File phụ trách) | Commit/PR | Điều đã học |
 |---|---|---|---|
-| Võ Hà Minh Huy | Dashboard, SLO & Alert | (chèn link commit) | Hiểu cách setup metrics và xây dựng Runbook |
-| Đỗ Duy Đông | Logging & PII | (chèn link commit) | Cấu hình log struct và redact PII Regex |
-| Nguyễn Minh Thái | Tracing & Prompt, Incident & Demo | (chèn link commit) | Cách điều tra root cause bằng traces và logs |
+| **Đỗ Duy Đông** (Tech Lead) | **CP1:** Thiết lập Structured Logging, Middleware (Correlation ID) và bảo vệ dữ liệu (PII).<br>*(File: `app/logging_config.py`, `app/middleware.py`, `app/pii.py`, `app/main.py`)* | [Sinh viên chèn link commit của Đông] | Hiểu cách setup logs tập trung, truy vết request qua hệ thống vi dịch vụ. |
+| **Võ Hà Minh Huy** (SRE) | **CP2 & Bonus:** Cấu hình Dashboard Spec, đo lường SLO, Alert Rules, Runbook xử lý sự cố và tính năng Cost Optimization.<br>*(File: `config/slo.yaml`, `config/alert_rules.yaml`, `docs/alerts.md`, `docs/dashboard-spec.md`, `app/incidents.py`, `app/mock_llm.py`)* | [Sinh viên chèn link commit của Huy] | Biết cách định lượng độ tin cậy, lên kịch bản on-call thực chiến và kiểm soát chi phí LLM. |
+| **Nguyễn Minh Thái** (QA) | **CP3 & Report:** Tích hợp Langfuse Tracing (Sub-components), Fetch Prompt, tính năng Anomaly Detection và chịu trách nhiệm toàn bộ hồ sơ Báo cáo.<br>*(File: `app/tracing.py`, `app/agent.py`, `app/mock_rag.py`, `scripts/detect_anomalies.py`, `submission/REPORT.md`, `evidence/*`)* | [Sinh viên chèn link commit của Thái] | Nắm vững kỹ thuật dùng Trace Waterfall để xác định gốc rễ của độ trễ (latency spikes). |

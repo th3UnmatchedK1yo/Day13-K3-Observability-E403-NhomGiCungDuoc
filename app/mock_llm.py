@@ -5,6 +5,7 @@ import time
 from dataclasses import dataclass
 
 from .incidents import STATE
+from .tracing import observe
 
 
 @dataclass
@@ -24,12 +25,16 @@ class FakeLLM:
     def __init__(self, model: str = "claude-sonnet-4-5") -> None:
         self.model = model
 
+    @observe(as_type="span")
     def generate(self, prompt: str) -> FakeResponse:
         time.sleep(0.15)
         input_tokens = max(20, len(prompt) // 4)
         output_tokens = random.randint(80, 180)
         if STATE["cost_spike"]:
             output_tokens *= 4
+            
+        # Optimization: Cap output tokens to 250 to prevent cost spikes
+        output_tokens = min(output_tokens, 250)
         answer = (
             "Starter answer. Teams should improve this output logic and add better quality checks. "
             "Use retrieved context and keep responses concise."

@@ -12,16 +12,16 @@
 
 ## 2. Kết quả kỹ thuật
 
-- Điểm `validate_logs.py`: 100/100
-- Tổng số traces: >10
+- Điểm `validate_logs.py`: 100/100 (Xem ảnh: evidence/validate_logs.png)
+- Tổng số traces: >10 (Xem ảnh: evidence/traces_list.png)
 - Số PII leak còn lại: 0
 - Link/đường dẫn dashboard: Sử dụng Langfuse Dashboard
 
 ## 3. Logging và tracing
 
-- Evidence correlation ID: evidence/correlation_id.png
-- Evidence PII redaction: evidence/pii_redaction.png
-- Evidence trace waterfall: evidence/trace_waterfall.png
+- Evidence correlation ID: evidence/logs_metadata.png
+- Evidence PII redaction: evidence/logs_pii.png
+- Evidence trace waterfall: evidence/trace_waterfall_rag_slow.png
 - Giải thích một span đáng chú ý: Dựa trên Trace Waterfall của request bị chậm (lúc làm CP3), span `retrieve` thuộc mock_rag tốn nhiều thời gian nhất (>2s), kéo theo tổng thời gian xử lý của cả request tăng lên. Điều này chứng tỏ sự cần thiết của sub-component trace trong việc phát hiện nút thắt cổ chai.
 
 ## 4. Prompt versioning
@@ -48,7 +48,11 @@
 - Root cause: Hệ thống RAG (Retrieval-Augmented Generation) phản hồi rất chậm. Hàm `retrieve` bên trong `app/mock_rag.py` tốn quá nhiều thời gian gây nghẽn toàn bộ luồng xử lý (Do kịch bản sự cố `rag_slow`).
 - Fix action: Khởi động lại service, tối ưu hoá vector database hoặc thêm timeout giới hạn thời gian chờ cho RAG retrieval. (Trong Lab: Tắt incident bằng cờ `--disable`).
 - Preventive measure: Thiết lập Alert tự động cho chỉ số `latency_p95` (rule `high_latency_p95`). Áp dụng cơ chế Caching (bộ nhớ đệm) để trả về ngay kết quả cho các câu hỏi trùng lặp mà không cần gọi RAG. Lắp Circuit Breaker để ngắt mạch khi vector store phản hồi chậm.
-## 7. Đóng góp cá nhân
+
+## 7. Bonus: Cost Optimization & Audit Log
+- Đã cấu hình giới hạn token đầu ra (max 250) để chống vọt xà chi phí (Cost Spike). Bằng chứng: evidence/cost_spike_bonus.png
+
+## 8. Đóng góp cá nhân
 
 Với mỗi thành viên, ghi rõ nhiệm vụ và link commit/PR tương ứng.
 

@@ -32,6 +32,9 @@ class FakeLLM:
         output_tokens = random.randint(80, 180)
         if STATE["cost_spike"]:
             output_tokens *= 4
+            
+        # Optimization: Cap output tokens to 250 to prevent cost spikes
+        output_tokens = min(output_tokens, 250)
         answer = (
             "Starter answer. Teams should improve this output logic and add better quality checks. "
             "Use retrieved context and keep responses concise."
